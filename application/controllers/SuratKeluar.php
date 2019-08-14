@@ -12,10 +12,15 @@ class SuratKeluar extends MY_Controller {
   //  Method untuk menampilkan data
 	public function daftar()
 	{
-    
     $this->_dts['bidang'] = $this->bidang->data();  // Proses pengambilan data dari database
     $this->_dts['data_list'] = $this->suratkeluar->data();  // Proses pengambilan data dari database
 		$this->view('kabid.suratkeluar.daftar', $this->_dts); // Oper data dari database ke view
+	}
+	
+	public function lihatSuratKeluar()
+	{
+		$this->_dts['data_list'] = $this->suratkeluar->data();  // Proses pengambilan data dari database
+		$this->view('kepaladinas.suratkeluar.daftar', $this->_dts); // Oper data dari database ke view
 	}
   
 	public function daftarDisposisi()

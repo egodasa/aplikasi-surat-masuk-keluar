@@ -73,6 +73,8 @@ $route['admin/suratmasuk/hapus']['GET'] = 'SuratMasuk/prosesHapus';     // Hapus
 $route['kepaladinas/disposisi']['GET'] = 'SuratMasuk/daftarDisposisi';                // Lihat Data
 $route['kepaladinas/disposisi/edit']['POST'] = 'SuratMasuk/prosesDisposisi';             // Proses Edit Data
 
+$route['kepaladinas/suratkeluar']['GET'] = 'SuratKeluar/lihatSuratKeluar';    
+
 $route['admin/bidang']['GET'] = 'Bidang/daftar';                // Lihat Data
 $route['admin/bidang/tambah']['POST'] = 'Bidang/prosesTambah';  // Proses Tambah Data
 $route['admin/bidang/edit']['POST'] = 'Bidang/prosesEdit';             // Proses Edit Data

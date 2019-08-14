@@ -75,12 +75,14 @@
                         <li><a href="{{ site_url('admin/bidang') }}"><i class="fa fa-home"></i> Bidang</a></li>
                         <li><a href="{{ site_url('admin/pegawai') }}"><i class="fa fa-home"></i> Pegawai</a></li>
                         <li><a href="{{ site_url('admin/suratmasuk') }}"><i class="fa fa-home"></i> Surat Masuk</a></li>
+                        <li><a href="{{ site_url('kabid/suratkeluar') }}"><i class="fa fa-home"></i> Surat Keluar</a></li>
                     <?php
                         break;
                         
                         case "Kepala Dinas":
                     ?>
                         <li><a href="{{ site_url('kepaladinas/disposisi') }}"><i class="fa fa-home"></i> Disposisi Surat</a></li>
+                    		<li><a href="{{ site_url('kepaladinas/suratkeluar') }}"><i class="fa fa-home"></i> Surat Keluar</a></li>
                     <?php
                         break;
                         case "Kepala Bidang":
