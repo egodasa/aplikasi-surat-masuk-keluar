@@ -14,7 +14,15 @@ class SuratMasuk extends MY_Controller {
 	{
     
     $this->_dts['bidang'] = $this->bidang->data();  // Proses pengambilan data dari database
-    $this->_dts['data_list'] = $this->suratmasuk->data();  // Proses pengambilan data dari database
+    if($_SESSION['level'] == "Kepala Bidang")
+    {
+      $this->_dts['data_list'] = $this->suratmasuk->dataWhere(["id_bidang" => $_SESSION['id_bidang']]);  // Proses pengambilan data dari database
+    }
+    else
+    {
+      $this->_dts['data_list'] = $this->suratmasuk->data();  // Proses pengambilan data dari database
+    }
+    
 		$this->view('admin.suratmasuk.daftar', $this->_dts); // Oper data dari database ke view
 	}
   

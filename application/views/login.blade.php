@@ -39,9 +39,9 @@
       </script>
     @endif
       <div class="login_wrapper">
+        
         <div class="animate form login_form">
-          <img src="{{ base_url() }}assets/images/logo2.png" class="img-responsive text-center">
-          <section class="login_content">
+          <section class="login_content"><img src="{{ base_url() }}assets/images/logo2.png" style="width: 100%;">
             <form method="POST" action="{{ site_url('login') }}">
               <h1>Login Member</h1>
               <div>

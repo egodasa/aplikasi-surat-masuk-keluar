@@ -12,8 +12,18 @@ class SuratKeluar extends MY_Controller {
   //  Method untuk menampilkan data
 	public function daftar()
 	{
-    $this->_dts['bidang'] = $this->bidang->data();  // Proses pengambilan data dari database
-    $this->_dts['data_list'] = $this->suratkeluar->data();  // Proses pengambilan data dari database
+    
+    if($_SESSION['level'] == "Kepala Bidang")
+    {
+      $this->_dts['bidang'] = $this->bidang->dataWhere(["id_bidang" => $_SESSION['id_bidang']]);  // Proses pengambilan data dari database
+      $this->_dts['data_list'] = $this->suratkeluar->dataWhere(["id_bidang" => $_SESSION['id_bidang']]);  // Proses pengambilan data dari database
+    } 
+    else
+    {
+      $this->_dts['bidang'] = $this->bidang->data();  // Proses pengambilan data dari database
+      $this->_dts['data_list'] = $this->suratkeluar->data();  // Proses pengambilan data dari database
+    }
+    
 		$this->view('kabid.suratkeluar.daftar', $this->_dts); // Oper data dari database ke view
 	}
 	
