@@ -83,6 +83,8 @@
                     ?>
                         <li><a href="{{ site_url('kepaladinas/disposisi') }}"><i class="fa fa-home"></i> Disposisi Surat</a></li>
                     		<li><a href="{{ site_url('kepaladinas/suratkeluar') }}"><i class="fa fa-home"></i> Surat Keluar</a></li>
+                    		<li><a href="{{ site_url('kepaladinas/laporan-surat-masuk') }}"><i class="fa fa-home"></i> Laporan Surat Masuk</a></li>
+                    		<li><a href="{{ site_url('kepaladinas/laporan-surat-keluar') }}"><i class="fa fa-home"></i> Laporan Surat Keluar</a></li>
                     <?php
                         break;
                         case "Kepala Bidang":

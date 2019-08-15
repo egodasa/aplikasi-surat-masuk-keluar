@@ -23,7 +23,7 @@ class ModelSuratMasuk extends MY_Model {
 	}
   public function dataWhere($where)
   {
-    return $this->db->select($this->table, "*", $where);
+    return $this->db->select($this->table, ["[><]bidang" => ["id_bidang" => "id"]], "*", $where);
   }
   
   // method untuk menambah data

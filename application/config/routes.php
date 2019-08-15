@@ -75,10 +75,21 @@ $route['kepaladinas/disposisi/edit']['POST'] = 'SuratMasuk/prosesDisposisi';    
 
 $route['kepaladinas/suratkeluar']['GET'] = 'SuratKeluar/lihatSuratKeluar';    
 
+$route['kepaladinas/laporan-surat-masuk']['GET'] = 'SuratMasuk/laporanSuratMasuk';    
+$route['kepaladinas/laporan-surat-masuk']['POST'] = 'SuratMasuk/prosesLaporanSuratMasuk';  
+
+  
+$route['kepaladinas/laporan-surat-keluar']['GET'] = 'SuratKeluar/laporanSuratKeluar';    
+$route['kepaladinas/laporan-surat-keluar']['POST'] = 'SuratKeluar/prosesLaporanSuratKeluar';  
+
+  
+
 $route['admin/bidang']['GET'] = 'Bidang/daftar';                // Lihat Data
 $route['admin/bidang/tambah']['POST'] = 'Bidang/prosesTambah';  // Proses Tambah Data
 $route['admin/bidang/edit']['POST'] = 'Bidang/prosesEdit';             // Proses Edit Data
 $route['admin/bidang/hapus']['GET'] = 'Bidang/prosesHapus';     // Hapus Data 
+
+
 
 // Route untuk login, register dsm
 $route['login']['GET'] = 'Autentikasi/login'; 

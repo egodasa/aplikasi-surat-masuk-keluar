@@ -1,7 +1,7 @@
 <?php
 session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+use Medoo\medoo;
 class SuratMasuk extends MY_Controller {
   public function __construct()
   {
@@ -89,6 +89,41 @@ class SuratMasuk extends MY_Controller {
   {
     $this->suratmasuk->prosesDisposisi($this->input->post("id"), $this->input->post(NULL, true));
     header("Location: ".site_url("kepaladinas/disposisi")); // // Arahkan user kembali ke halaman daftar
+  }
+  
+  public function laporanSuratMasuk()
+  {
+    $this->view("laporan-surat-masuk");
+  }
+  
+  public function prosesLaporanSuratMasuk()
+  {
+    $parameter = $this->input->post(NULL, true);
+    $tanggal = date("Y-m-d");
+    $jenis_laporan = $parameter['jenis_laporan'];
+    $where = ["tglsurat" => $tanggal];
+    if(isset($parameter['tgl']) && !empty($parameter['tgl']))
+    {
+      $tanggal = $parameter['tgl'];
+    }
+    $keterangan_tanggal = explode(" ", TanggalIndo($tanggal));
+    switch($jenis_laporan)
+    {
+      case "Harian":
+        $where = Medoo::raw("WHERE DATE(tglsurat) = DATE(:tgl)", [":tgl" => $tanggal]);
+        $this->_dts['judul'] = "Laporan Harian Surat Masuk <br> Tanggal ".TanggalIndo($tanggal);
+      break;
+      case "Bulanan":
+        $where = Medoo::raw("WHERE LEFT(tglsurat, 7) = LEFT(:tgl, 7)", [":tgl" => $tanggal]);
+        $this->_dts['judul'] = "Laporan Bulanan Surat Masuk <br> Bulan ".$keterangan_tanggal[1]." ".$keterangan_tanggal[2];
+      break;
+      case "Tahunan":
+        $where = Medoo::raw("WHERE LEFT(tglsurat, 4) = LEFT(:tgl, 4)", [":tgl" => $tanggal]);
+        $this->_dts['judul'] = "Laporan Tahunan Surat Masuk <br> Tahun ".$keterangan_tanggal[2];
+      break;
+    }
+    $this->_dts['data_list'] = $this->suratmasuk->dataWhere($where);
+    $this->view("cetak-laporan-surat-masuk", $this->_dts);
   }
   
 }
