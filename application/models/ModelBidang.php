@@ -18,29 +18,31 @@ class ModelBidang extends MY_Model {
     }
     else
     {
-      return $this->db->select($this->table, "*");
+      return $this->db->query("SELECT bidang.*, pegawai.nama FROM bidang JOIN pegawai ON bidang.nip = pegawai.nip")->fetchAll(PDO::FETCH_ASSOC);
     }
 	}
+  
+  public function dataWhere($where)
+  {
+    return $this->db->select($this->table, "*", $where);
+  }
   
   // method untuk menambah data
   public function tambah($data)
   {
     $this->db->insert($this->table, [
       "nip" => $data["nip"],
-      "bidang" => $data["bidang"],
-      "nama" => $data["nama"]
+      "bidang" => $data["bidang"]
     ]);
     
-    return true;
+    return $this->db->id();
   }
   
   // method untuk edit data
   public function edit($id, $data)
   {
     $this->db->update($this->table, [
-      "nip" => $data["nip"],
-      "bidang" => $data["bidang"],
-      "nama" => $data["nama"]
+      "bidang" => $data["bidang"]
     ],[
       $this->primaryKey => $id
     ]);

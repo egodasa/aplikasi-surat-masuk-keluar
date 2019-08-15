@@ -2,24 +2,22 @@
 session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Medoo\medoo;
+
 class Bidang extends MY_Controller {
   public function __construct()
   {
     parent::__construct();
     $this->load->model("ModelBidang", "bidang");
+    $this->load->model("ModelPegawai", "pegawai");
   }
   //  Method untuk menampilkan data
 	public function daftar()
 	{
+    $this->_dts['data_pegawai'] = $this->pegawai->dataWhere(Medoo::raw("WHERE level = 'Kepala Bidang' AND nip NOT IN (SELECT nip FROM bidang)"));  // Proses pengambilan data dari database
     $this->_dts['data_list'] = $this->bidang->data();  // Proses pengambilan data dari database
 		$this->view('admin.bidang.daftar', $this->_dts); // Oper data dari database ke view
 	}
-  
-  // Method untuk menampilkan form tambah data
-  public function tambah()
-  {
-    $this->view('admin.bidang.tambah'); // Langsung tampilkan view tambah data
-  }
   
   // Method untuk memproses penambahan data
   // Method diakses dalam metode POST
@@ -27,13 +25,6 @@ class Bidang extends MY_Controller {
   {
     $this->bidang->tambah($this->input->post(NULL, TRUE));
     header("Location: ".site_url("admin/bidang")); // Arahkan kembali user ke halaman daftar
-  }
-  
-  // Method untuk menampilkan form edit
-  public function edit()
-  {
-    $this->_dts['detail'] = $this->bidang->data($this->input->get('id')); // Ambil data yang akan diedit berdasarkan ID
-    $this->view('admin.bidang.edit', $this->_dts); // Oper data ke view
   }
   
   // Method untuk memproses data yang akan diedit
