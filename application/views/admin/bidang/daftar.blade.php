@@ -31,7 +31,7 @@
         <td>{{ $data['bidang'] }}</td>
         <td>
           <button type="button" onclick="showModalEdit({{ $nomor }})" class="btn btn-success">Edit</button>
-          <button type="button" onclick="showConfirmationDelete('<?=site_url("admin/bidang/hapus?id=".$data['id'])?>')" class="btn btn-danger">Hapus</button>
+          <button type="button" onclick="showConfirmationDelete('<?=site_url("admin/bidang/hapus?id=".$data['nip'])?>')" class="btn btn-danger">Hapus</button>
         </td>
       </tr>
     @endforeach
