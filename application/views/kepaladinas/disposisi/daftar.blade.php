@@ -19,37 +19,106 @@
       <table class="table table-bordered table-stripped">
         <tr>
           <th>No</th>
-          <th>No Surat</th>
-          <th>Bidang</th>
-          <th>Tgl Surat</th>
-          <th>Tgl Diterima</th>
-          <th>Judul Surat</th>
-          <th>Asal Surat</th>
-          <th>Email</th>
-          <th>Perihal Surat</th>
-          <th>Alamat Surat</th>
-          <th>Kode Pos</th>
-          <th>Website</th>
-          <th>File Surat</th>
+          <th>Info Surat</th>
+          <th>Isi Surat</th>
+          <th>Status</th>
+          <th>Disposisi</th>
           <th>Aksi</th>
         </tr>
         @foreach($data_list as $nomor => $data)
           <tr>
             <td>{{ ($nomor+1) }}</td>
-            <td>{{ $data['nomorsm'] }}</td>
-            <td>{{ $data['bidang'] }}</td>
-            <td>{{ TanggalIndo($data['tglsurat']) }}</td>
-            <td>{{ TanggalIndo($data['tglditerima']) }}</td>
-            <td>{{ $data['judulsurat'] }}</td>
-            <td>{{ $data['asalsurat'] }}</td>
-            <td>{{ $data['email'] }}</td>
-            <td>{{ $data['perihalsurat'] }}</td>
-            <td>{{ $data['alamatsurat'] }}</td>
-            <td>{{ $data['kodepos'] }}</td>
-            <td>{{ $data['website'] }}</td>
-            <td><a href="{{ base_url() }}assets/images/{{ $data['filesurat'] }}">Unduh File</td>
+            <td style="width: 450px;">
+              <table style="padding: 5px;">
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Nomor Surat</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['nomorsm'] }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Bidang</td>
+                    <td style="vertical-align: top;padding: 5px;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['bidang'] }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Tanggal Surat</td>
+                    <td style="vertical-align: top;padding: 5px;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ TanggalIndo($data['tglsurat']) }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Tanggal Diterima</td>
+                    <td style="vertical-align: top;padding: 5px;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ TanggalIndo($data['tglditerima']) }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Alamat Surat</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['alamatsurat'] }}, {{ $data['kodepos'] }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Email</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['email'] }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Website</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['website'] }}</td>
+                  </tr>
+                </table>
+            </td>
+            <td style="width: 450px;">
+              <table style="padding: 5px;">
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Judul Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['judulsurat'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Asal Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['asalsurat'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Perihal Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['perihalsurat'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">File Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">
+                    <a href="{{ base_url() }}assets/images/{{ $data['filesurat'] }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Unduh Surat</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>{{ $data['status'] }}</td>
+            <td style="width: 450px;">
+              @if($data['status'] != '')
+                <table style="padding: 5px;">
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Isi Disposisi</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['isidisposisi'] }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Tanggal Disposisi</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ TanggalIndo($data['tgldisposisi']) }}</td>
+                  </tr>
+                  <tr>
+                    <td style="vertical-align: top;padding: 5px;">Keterangan</td>
+                    <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                    <td style="vertical-align: top;padding: 5px;">{{ $data['ket'] }}</td>
+                  </tr>
+                </table>
+              @endif
+            </td>
             <td>
+            @if($data['status'] == '')
               <button type="button" onclick="showModalEdit({{ $nomor }})" class="btn btn-primary">Disposisi</button>
+            @endif
             </td>
           </tr>
         @endforeach

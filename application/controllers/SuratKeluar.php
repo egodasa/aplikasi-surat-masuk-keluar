@@ -15,7 +15,7 @@ class SuratKeluar extends MY_Controller {
     
     if($_SESSION['level'] == "Kepala Bidang")
     {
-      $this->_dts['bidang'] = $this->bidang->dataWhere(["id_bidang" => $_SESSION['id_bidang']]);  // Proses pengambilan data dari database
+      $this->_dts['bidang'] = $this->bidang->dataWhere(["nip" => $_SESSION['nip']]);  // Proses pengambilan data dari database
       $this->_dts['data_list'] = $this->suratkeluar->dataWhere(["id_bidang" => $_SESSION['id_bidang']]);  // Proses pengambilan data dari database
     } 
     else

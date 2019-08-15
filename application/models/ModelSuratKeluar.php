@@ -18,12 +18,12 @@ class ModelSuratKeluar extends MY_Model {
     }
     else
     {
-      return $this->db->query("SELECT a.*, b.bidang FROM suratkeluar a JOIN bidang b ON a.id_bidang = b.id")->fetchAll(PDO::FETCH_ASSOC);
+      return $this->db->query("SELECT a.*, b.bidang FROM suratkeluar a JOIN bidang b ON a.nip = b.nip")->fetchAll(PDO::FETCH_ASSOC);
     }
 	}
   public function dataWhere($where)
   {
-    return $this->db->select($this->table, "*", $where);
+    return $this->db->select($this->table, ["[><]bidang" => ["id_bidang" => "id"]], "*", $where);
   }
   
   // method untuk menambah data

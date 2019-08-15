@@ -28,7 +28,7 @@ class SuratMasuk extends MY_Controller {
   
 	public function daftarDisposisi()
 	{
-    $this->_dts['data_list'] = $this->suratmasuk->dataDisposisi();  // Proses pengambilan data dari database
+    $this->_dts['data_list'] = $this->suratmasuk->data();  // Proses pengambilan data dari database
 		$this->view('kepaladinas.disposisi.daftar', $this->_dts); // Oper data dari database ke view
 	}
   

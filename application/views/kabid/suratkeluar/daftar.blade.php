@@ -20,29 +20,68 @@
       <table class="table table-bordered table-stripped">
         <tr>
           <th>No</th>
-          <th>No Surat</th>
-          <th>Bidang</th>
-          <th>Tgl Surat</th>
-          <th>Judul Surat</th>
-          <th>Tujuan</th>
-          <th>Perihal Surat</th>
-          <th>Alamat Surat</th>
-          <th>Catatan</th>
-          <th>File Surat</th>
+          <th>Info Surat</th>
+          <th>Isi Surat</th>
           <th>Aksi</th>
         </tr>
         @foreach($data_list as $nomor => $data)
           <tr>
             <td>{{ ($nomor+1) }}</td>
-            <td>{{ $data['nomorsk'] }}</td>
-            <td>{{ $data['bidang'] }}</td>
-            <td>{{ TanggalIndo($data['tglsurat']) }}</td>
-            <td>{{ $data['judulsurat'] }}</td>
-            <td>{{ $data['tujuan'] }}</td>
-            <td>{{ $data['perihal'] }}</td>
-            <td>{{ $data['alamat'] }}</td>
-            <td>{{ $data['catatan'] }}</td>
-            <td><a href="{{ base_url() }}assets/images/{{ $data['filesurat'] }}">Unduh File</td>
+            <td>
+              <table style="padding: 5px;">
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Nomor SK</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['nomorsk'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Bidang</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['bidang'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Tanggal Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ TanggalIndo($data['tglsurat']) }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Alamat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['alamat'] }}</td>
+                </tr>
+              </table>  
+            </td>
+            <td>
+              <table style="padding: 5px;">
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Judul Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['judulsurat'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Perihal Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['perihal'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Tujuan Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['tujuan'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">Catatan</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">{{ $data['catatan'] }}</td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;padding: 5px;">File Surat</td>
+                  <td style="vertical-align: top;padding: 5px 1px;"> : </td>
+                  <td style="vertical-align: top;padding: 5px;">
+                    <a href="{{ base_url() }}assets/images/{{ $data['filesurat'] }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Unduh Surat</a>
+                  </td>
+                </tr>
+              </table>  
+            </td>
             <td>
               <button type="button" onclick="showModalEdit({{ $nomor }})" class="btn btn-success">Edit</button>
               <button type="button" onclick="showConfirmationDelete('<?=site_url("kabid/suratkeluar/hapus?id=".$data['id'])?>')" class="btn btn-danger">Hapus</button>
@@ -61,7 +100,7 @@
       elId("form_modal").action = "";
       elName("id")[0].value = "";
       elName("nomorsk")[0].value = "";
-      elName("id_bidang")[0].value = "";
+      elName("id_bidang")[0].value = "<?=$_SESSION['id_bidang']?>";
       elName("tglsurat")[0].value = "";
       elName("judulsurat")[0].value = "";
       elName("tujuan")[0].value = "";
@@ -122,7 +161,11 @@
           <form id="form_modal" method="POST" action="{{ site_url('kabid/suratkeluar/tambah') }}" enctype='multipart/form-data'>
             <input type="hidden" name="id">
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'nomorsk', 'class' => 'form-control', 'max' => 50, 'label' => 'Nomor Surat Keluar']])	
-            @include('components.form.select', ['_data' => ['name' => 'id_bidang', 'class' => 'form-control', 'label' => 'Bidang', 'val' => 'id', 'caption' => 'bidang', 'options' => $bidang]])	
+            @if($_SESSION['level'] == "Kepala Bidang")
+              <input type="hidden" name="id_bidang" />
+            @else
+              @include('components.form.select', ['_data' => ['name' => 'id_bidang', 'class' => 'form-control', 'label' => 'Bidang', 'val' => 'id', 'caption' => 'bidang', 'options' => $bidang]])
+            @endif
             @include('components.form.input', ['_data' => ['type' => 'date', 'name' => 'tglsurat', 'class' => 'form-control', 'max' => 50, 'label' => 'Tanggal Surat']])
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'judulsurat', 'class' => 'form-control', 'max' => 100, 'label' => 'Judul Surat']])	
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'tujuan', 'class' => 'form-control', 'max' => 100, 'label' => 'Tujuan']])
