@@ -97,5 +97,27 @@ class ModelPegawai extends MY_Model {
   {
     return $this->db->get($this->table, "*", ["nip" => $username, "password" => $password]);
   }
- 
+  public function gantiPassword($id_pengguna, $password_lama, $password_baru, $password_baru_cek)
+  {
+    $password = $this->data($id_pengguna);
+    
+    // cek password lama terlebih dahulu
+    if($password['password'] == $password_lama)
+    {
+      // cek kecocokan password
+      if($password_baru == $password_baru_cek)
+      {
+        $this->db->update($this->table, ["password" => $password_baru], [$this->primaryKey => $id_pengguna]);
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      return true;
+    }
+  }
 }

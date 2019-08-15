@@ -85,6 +85,8 @@ $route['login']['GET'] = 'Autentikasi/login';
 $route['login']['POST'] = 'Autentikasi/prosesLogin'; 
 $route['logout']['GET'] = 'Autentikasi/prosesLogout'; 
 $route['beranda']['GET'] = 'Home/beranda';
+$route['ganti-password']['GET'] = 'Pegawai/gantiPassword';
+$route['ganti-password']['POST'] = 'Pegawai/prosesGantiPassword';
 
 $route['404']['GET'] = 'Autentikasi/dilarang'; 
 

@@ -67,4 +67,21 @@ class Pegawai extends MY_Controller {
     $this->pegawai->hapus($this->input->get('id')); // Proses hapus data
     header("Location: ".site_url("admin/pegawai")); // // Arahkan user kembali ke halaman daftar
   }
+  
+  public function gantiPassword()
+  {
+    $this->view("gantipassword");
+  }
+  public function prosesGantiPassword()
+  {
+    $data = $this->input->post(NULL, true);
+    if($this->pegawai->gantiPassword($data['id'], $data['password_lama'], $data['password_baru'], $data['password_baru_cek']))
+    {
+      header("Location: ".site_url("logout")); // // Arahkan user kembali ke halaman daftar
+    }
+    else
+    {
+      $this->gantiPassword();
+    }
+  }
 }
