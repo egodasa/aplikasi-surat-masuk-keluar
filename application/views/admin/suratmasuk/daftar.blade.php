@@ -21,7 +21,7 @@
         <tr>
           <th>No</th>
           <th>No Surat</th>
-          <th>Bidang</th>
+          <th>Bidang Tujuan</th>
           <th>Tgl Surat</th>
           <th>Tgl Diterima</th>
           <th>Judul Surat</th>
@@ -134,7 +134,7 @@
           <form id="form_modal" method="POST" action="{{ site_url('admin/suratmasuk/tambah') }}" enctype='multipart/form-data'>
             <input type="hidden" name="id">
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'nomorsm', 'class' => 'form-control', 'max' => 50, 'label' => 'Nomor Surat Masuk']])	
-            @include('components.form.select', ['_data' => ['name' => 'id_bidang', 'class' => 'form-control', 'label' => 'Bidang', 'val' => 'id', 'caption' => 'bidang', 'options' => $bidang]])	
+            @include('components.form.select', ['_data' => ['name' => 'id_bidang', 'class' => 'form-control', 'label' => 'Bidang Tujuan', 'val' => 'id', 'caption' => 'bidang', 'options' => $bidang]])	
             @include('components.form.input', ['_data' => ['type' => 'date', 'name' => 'tglsurat', 'class' => 'form-control', 'max' => 50, 'label' => 'Tanggal Surat']])
             @include('components.form.input', ['_data' => ['type' => 'date', 'name' => 'tglditerima', 'class' => 'form-control', 'max' => 50, 'label' => 'Tanggal Diterima']])
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'judulsurat', 'class' => 'form-control', 'max' => 100, 'label' => 'Judul Surat']])	
