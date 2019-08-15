@@ -78,12 +78,27 @@ class ModelSuratKeluar extends MY_Model {
     return true;
   }
   
-  public function dataStatistikSuratKeluar()
+  public function dataStatistikSuratKeluar($id_bidang = null)
   {
-    return $this->db->query("
+    $data = [];
+    if($id_bidang == null)
+    {
+      $data = $this->db->query("
       SELECT 
       (SELECT COUNT(id) FROM suratkeluar) AS keluar;
     ")->fetch(PDO::FETCH_ASSOC);
+    }
+    else
+    {
+      $data = $this->db->query("
+          SELECT 
+          (SELECT IFNULL(COUNT(id), 0) FROM suratkeluar) AS keluar WHERE id_bidang = ".$id_bidang)->fetch(PDO::FETCH_ASSOC);
+    }
+    if($data == null)
+    {
+      $data["keluar"] = 0;
+    }
+    return $data;
   }
  
 }

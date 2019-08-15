@@ -11,7 +11,7 @@ class Home extends MY_Controller {
   }
 	public function beranda()
 	{
-    $this->_dts = array_merge($this->suratmasuk->dataStatistikSuratMasuk(), $this->suratkeluar->dataStatistikSuratKeluar());
+    $this->_dts = array_merge($this->suratmasuk->dataStatistikSuratMasuk($_SESSION["id_bidang"]), $this->suratkeluar->dataStatistikSuratKeluar($_SESSION["id_bidang"]));
 		return $this->view('beranda', $this->_dts);
 	}
 }

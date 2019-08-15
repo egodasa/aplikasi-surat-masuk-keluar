@@ -7,6 +7,7 @@ class Autentikasi extends MY_Controller {
   {
     parent::__construct();
     $this->load->model("ModelPegawai", "pegawai");
+    $this->load->model("ModelBidang", "bidang");
   }
   
   public function login()
@@ -22,14 +23,25 @@ class Autentikasi extends MY_Controller {
   }
   public function prosesLogin()
   {
-    $cek = $this->pegawai->cekLogin($this->input->post('username'), $this->input->post('password'));
-    if(empty($cek))
+    $data_pegawai = $this->pegawai->cekLogin($this->input->post('username'), $this->input->post('password'));
+    $data_bidang = [
+      "id_bidang" => null
+    ];
+    if(empty($data_pegawai))
     {
       header('Location: '.site_url('login?salah=true'));
     }
     else
     {
-      $_SESSION = $cek;
+      if($data_pegawai['level'] == "Kepala Bidang")
+      {
+        $data_bidang_sementara = $this->bidang->data($data_pegawai["nip"]);
+        $data_bidang["id_bidang"] = $data_bidang_sementara["id"];
+        $_SESSION = array_merge($data_pegawai, $data_bidang);
+      }
+      
+      $_SESSION = array_merge($data_pegawai, $data_bidang);
+      
       header('Location: '.site_url('beranda'));
     }
   }

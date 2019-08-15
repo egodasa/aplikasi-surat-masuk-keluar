@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class ModelBidang extends MY_Model {
   // Nama Tabel
   private $table = "bidang";      // nama tabelnya
-  private $primaryKey = "id"; // primary keynya
+  private $primaryKey = "nip"; // primary keynya
   
   
   //  Method untuk menampilkan data

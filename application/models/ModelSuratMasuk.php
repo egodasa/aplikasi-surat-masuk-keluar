@@ -104,14 +104,28 @@ class ModelSuratMasuk extends MY_Model {
     return true;
   }
   
-  public function dataStatistikSuratMasuk()
+  public function dataStatistikSuratMasuk($id_bidang = null)
   {
-    return $this->db->query("
-      SELECT 
-      (SELECT COUNT(id) FROM suratmasuk WHERE status = 'Belum Di Disposisi') AS belum,
-      (SELECT COUNT(id) FROM suratmasuk WHERE status = 'acc') AS acc,
-      (SELECT COUNT(id) FROM suratmasuk WHERE status = 'ditolak') AS ditolak;
-    ")->fetch(PDO::FETCH_ASSOC);
+    $data = [];
+    if($id_bidang == null)
+    {
+      $data = $this->db->query("
+                SELECT 
+                (SELECT COUNT(id) FROM suratmasuk WHERE status = 'Belum Di Disposisi') AS belum,
+                (SELECT COUNT(id) FROM suratmasuk WHERE status = 'acc') AS acc,
+                (SELECT COUNT(id) FROM suratmasuk WHERE status = 'ditolak') AS ditolak;
+              ")->fetch(PDO::FETCH_ASSOC);
+    }
+    else
+    {
+      $data = $this->db->query("
+                                  SELECT 
+                                  (SELECT COUNT(id) FROM suratmasuk WHERE status = 'Belum Di Disposisi' AND id_bidang = ".$id_bidang.") AS belum,
+                                  (SELECT COUNT(id) FROM suratmasuk WHERE status = 'acc' AND id_bidang = ".$id_bidang.") AS acc,
+                                  (SELECT COUNT(id) FROM suratmasuk WHERE status = 'ditolak' AND id_bidang = ".$id_bidang.") AS ditolak;
+                                ")->fetch(PDO::FETCH_ASSOC);
+    }
+    return $data;
   }
  
 }
