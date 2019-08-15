@@ -31,7 +31,7 @@
         <td>{{ $data['bidang'] }}</td>
         <td>
           <button type="button" onclick="showModalEdit({{ $nomor }})" class="btn btn-success">Edit</button>
-          <a href="<?=site_url("admin/bidang/hapus?id=".$data['id'])?>" class="btn btn-danger">Hapus</a>
+          <button type="button" onclick="showConfirmationDelete('<?=site_url("admin/bidang/hapus?id=".$data['id'])?>')" class="btn btn-danger">Hapus</button>
         </td>
       </tr>
     @endforeach
@@ -47,7 +47,7 @@
       elName("id")[0].value = "";
       elName("nip")[0].value = "";
       elName("bidang")[0].value = "";
-      elName("nama")[0].value = "";
+      elName("nip")[0].disabled = false;
     }
     
     function closeModal()
@@ -71,8 +71,8 @@
       elId("form_modal").action = "{{ site_url('admin/bidang/edit') }}";
       elName("id")[0].value = detail.id;
       elName("nip")[0].value = detail.nip;
+      elName("nip")[0].disabled = true;
       elName("bidang")[0].value = detail.bidang;
-      elName("nama")[0].value = detail.nama;
       showModal("#modal");
     }
   </script>
@@ -88,9 +88,8 @@
         <div class="modal-body">
           <form id="form_modal" method="POST" action="{{ site_url('admin/bidang/tambah') }}">
             <input type="hidden" name="id">
-            @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'nip', 'class' => 'form-control', 'max' => 50, 'label' => 'NIP']])	
-            @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'bidang', 'class' => 'form-control', 'max' => 50, 'label' => 'Bidang']])	
-            @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'nama', 'class' => 'form-control', 'max' => 50, 'label' => 'Nama']])
+            @include('components.form.select', ['_data' => ['name' => 'nip', 'class' => 'form-control', 'label' => 'NIP', 'val' => 'nip', 'caption' => 'nip', 'options' => $data_pegawai]])		
+            @include('components.form.input', ['_data' => ['type' => 'text', 'max' => 50, 'name' => 'bidang', 'class' => 'form-control', 'label' => 'Bidang']])	
           
         </div>
         <div class="modal-footer">

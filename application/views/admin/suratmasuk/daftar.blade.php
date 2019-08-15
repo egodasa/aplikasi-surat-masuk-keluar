@@ -51,7 +51,7 @@
             <td><a href="{{ base_url() }}assets/images/{{ $data['filesurat'] }}">Unduh File</td>
             <td>
               <button type="button" onclick="showModalEdit({{ $nomor }})" class="btn btn-success">Edit</button>
-              <a href="<?=site_url("admin/suratmasuk/hapus?id=".$data['id'])?>" class="btn btn-danger">Hapus</a>
+              <button type="button" onclick="showConfirmationDelete('<?=site_url("admin/suratmasuk/hapus?id=".$data['id'])?>')" class="btn btn-danger">Hapus</button>
             </td>
           </tr>
         @endforeach

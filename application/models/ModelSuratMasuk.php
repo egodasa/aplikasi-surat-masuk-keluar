@@ -21,6 +21,10 @@ class ModelSuratMasuk extends MY_Model {
       return $this->db->query("SELECT a.*, b.bidang FROM suratmasuk a JOIN bidang b ON a.id_bidang = b.id")->fetchAll(PDO::FETCH_ASSOC);
     }
 	}
+  public function dataWhere($where)
+  {
+    return $this->db->select($this->table, "*", $where);
+  }
   
   // method untuk menambah data
   public function tambah($data)
@@ -45,7 +49,7 @@ class ModelSuratMasuk extends MY_Model {
     }
     $this->db->insert($this->table, $data_tmp);
     
-    return true;
+    return $this->db->id();
   }
   
   // method untuk edit data

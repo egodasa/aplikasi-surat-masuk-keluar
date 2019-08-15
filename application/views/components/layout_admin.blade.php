@@ -185,8 +185,26 @@
     @section('script')
       <!-- Custom Script -->
     @show
-    
-    <script>
+    <!-- modal untuk peringatan hapus -->
+    <div class="modal fade hide-modal" id="modal_hapus">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="judul_modal">Peringatan!</h4>
+        </div>
+        <div class="modal-body">
+          <h5>Apakah Anda yakin untuk menghapus data ini?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" onclick="hideModal('#modal_hapus')">Batal</button>
+          <a id="url_hapus" href="" class="btn btn-danger">Hapus Data</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
       $('.table').DataTable();
       function elId(id)
       {
@@ -204,7 +222,11 @@
       {
         $(id).modal("hide");
       }
+      function showConfirmationDelete(url)
+      {
+        document.getElementById("url_hapus").href = url;
+        showModal('#modal_hapus');
+      }
     </script>
-    
   </body>
 </html>

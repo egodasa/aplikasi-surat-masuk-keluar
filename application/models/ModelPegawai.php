@@ -21,6 +21,10 @@ class ModelPegawai extends MY_Model {
       return $this->db->select($this->table, "*");
     }
 	}
+  public function dataWhere($where)
+  {
+    return $this->db->select($this->table, "*", $where);
+  }
   
   // method untuk menambah data
   public function tambah($data)
@@ -48,7 +52,7 @@ class ModelPegawai extends MY_Model {
     }
     $this->db->insert($this->table, $data_tmp);
     
-    return true;
+    return $this->db->id();
   }
   
   // method untuk edit data
