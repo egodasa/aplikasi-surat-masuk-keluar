@@ -23,7 +23,19 @@ class ModelSuratKeluar extends MY_Model {
 	}
   public function dataWhere($where)
   {
-    return $this->db->select($this->table, ["[><]bidang" => ["id_bidang" => "id"]], "*", $where);
+    return $this->db->select($this->table, ["[><]bidang" => ["id_bidang" => "id"]], [
+    	"suratkeluar.id",
+    	"suratkeluar.nomorsk",
+    	"suratkeluar.id_bidang",
+    	"suratkeluar.tglsurat",
+    	"suratkeluar.judulsurat",
+    	"suratkeluar.tujuan",
+    	"suratkeluar.perihal",
+    	"suratkeluar.filesurat",
+    	"suratkeluar.alamat",
+    	"suratkeluar.catatan",
+    	"bidang.bidang"
+    ], $where);
   }
   
   // method untuk menambah data
@@ -70,6 +82,7 @@ class ModelSuratKeluar extends MY_Model {
     ]);
     return true;
   }
+ 
   
   // method untuk hapus data
   public function hapus($id)

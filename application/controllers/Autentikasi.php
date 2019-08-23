@@ -8,6 +8,8 @@ class Autentikasi extends MY_Controller {
     parent::__construct();
     $this->load->model("ModelPegawai", "pegawai");
     $this->load->model("ModelBidang", "bidang");
+    $this->load->model("ModelSuratMasuk", "surat_masuk");
+    
   }
   
   public function login()
@@ -41,6 +43,8 @@ class Autentikasi extends MY_Controller {
       }
       
       $_SESSION = array_merge($data_pegawai, $data_bidang);
+      $_SESSION['banyak_surat_masuk'] = $this->surat_masuk->hitungBanyakSuratMasuk();
+      $_SESSION['surat_masuk'] = $this->surat_masuk->suratYangBelumDidisposisi();
       
       header('Location: '.site_url('beranda'));
     }

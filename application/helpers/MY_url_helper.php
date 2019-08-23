@@ -4,14 +4,21 @@
     }
   
   function TanggalIndo($date){
-      $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+  	if(!empty($date))
+  	{
+  		$BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
    
       $tahun = substr($date, 0, 4);
       $bulan = substr($date, 5, 2);
       $tgl   = substr($date, 8, 2);
    
       $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;        
-      return($result);
+      return $result;	
+  	}
+  	else
+  	{
+  		return "";
+  	}
   }
   
   
@@ -207,7 +214,7 @@
         } 
   function tanggal_indo($tanggal, $cetak_hari = false, $pemisah_hari = ", ")
   {
-    if($tanggal != "")
+    if(!empty($tanggal))
     {
       $tanggal = substr($tanggal, 0, -10);
       $hari = array ( 1 =>    'Senin',
@@ -395,7 +402,8 @@
   }
   function fileUpload($files, $lokasi){
     $file_tmp = $files['tmp_name'];
-    $file_ext=strtolower(end(explode('.', $files['name'])));
+    $nama_file = end(explode('.', $files['name']));
+    $file_ext=strtolower($nama_file);
     $nama_file = generateNumber().".".$file_ext;
     $lokasi_file = $lokasi.$nama_file;
     move_uploaded_file($file_tmp, $lokasi_file);

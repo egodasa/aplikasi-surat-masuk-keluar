@@ -28,6 +28,7 @@
           <th>Alamat</th>
           <th>Status</th>
           <th>NoHP</th>
+          <th>Email</th>
           <th>Jabatan</th>
           <th>Golongan</th>
           <th>Level</th>
@@ -44,6 +45,7 @@
             <td>{{ $data['alamat'] }}</td>
             <td>{{ $data['status'] }}</td>
             <td>{{ $data['hp'] }}</td>
+            <td>{{ $data['email'] }}</td>
             <td>{{ $data['jabatan'] }}</td>
             <td>{{ $data['gol'] }}</td>
             <td>{{ $data['level'] }}</td>
@@ -72,6 +74,7 @@
       elName("alamat")[0].value = "";
       elName("status")[0].value = "";
       elName("hp")[0].value = "";
+      elName("email")[0].value = "";
       elName("jabatan")[0].value = "";
       elName("gol")[0].value = "";
       elName("level")[0].value = "";
@@ -108,6 +111,7 @@
       elName("alamat")[0].value = detail.alamat
       elName("status")[0].value = detail.status;
       elName("hp")[0].value = detail.hp;
+      elName("email")[0].value = detail.email;
       elName("jabatan")[0].value = detail.jabatan;
       elName("gol")[0].value = detail.gol;
       elName("level")[0].value = detail.level;
@@ -136,7 +140,8 @@
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'nip', 'class' => 'form-control', 'max' => 50, 'label' => 'NIP']])	
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'nama', 'class' => 'form-control', 'max' => 50, 'label' => 'Nama']])
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'tempatlhr', 'class' => 'form-control', 'max' => 30, 'label' => 'Tempat Lahir']])	
-            @include('components.form.input', ['_data' => ['type' => 'date', 'name' => 'tgllahir', 'class' => 'form-control', 'max' => 12, 'label' => 'Tanggal Lahir']])	
+            @include('components.form.input', ['_data' => ['type' => 'date', 'name' => 'tgllahir', 'class' => 'form-control', 'max' => 12, 'label' => 'Tanggal Lahir']])
+            @include('components.form.input', ['_data' => ['type' => 'email', 'name' => 'email', 'class' => 'form-control', 'max' => 50, 'label' => 'Email']])
             @include('components.form.select', ['_data' => ['name' => 'jeniskelamin', 'class' => 'form-control', 'label' => 'Jenis Kelamin', 'val' => 'value', 'caption' => 'value', 'options' => [
               ['value' => 'Laki-laki'],
               ['value' => 'Perempuan']

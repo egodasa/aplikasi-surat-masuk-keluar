@@ -95,7 +95,7 @@
             </td>
             <td>{{ $data['status'] }}</td>
             <td style="width: 450px;">
-              @if($data['status'] != '')
+              @if($data['status'] != 'Belum Di disposisi')
                 <table style="padding: 5px;">
                   <tr>
                     <td style="vertical-align: top;padding: 5px;">Isi Disposisi</td>
@@ -116,7 +116,7 @@
               @endif
             </td>
             <td>
-            @if($data['status'] == '')
+            @if($data['status'] == 'Belum Di disposisi')
               <button type="button" onclick="showModalEdit({{ $nomor }})" class="btn btn-primary">Disposisi</button>
             @endif
             </td>

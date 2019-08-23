@@ -40,7 +40,8 @@ class ModelPegawai extends MY_Model {
       "hp" => $data["hp"],
       "jabatan" => $data["jabatan"],
       "gol" => $data["gol"],
-      "level" => $data["level"]
+      "level" => $data["level"],
+      "email" => $data["email"]
     ];
     if(isset($data['password']) || !empty($data['password']))
     {
@@ -69,7 +70,8 @@ class ModelPegawai extends MY_Model {
       "hp" => $data["hp"],
       "jabatan" => $data["jabatan"],
       "gol" => $data["gol"],
-      "level" => $data["level"]
+      "level" => $data["level"],
+       "email" => $data["email"]
     ];
     if(isset($data['password']) || !empty($data['password']))
     {

@@ -8,6 +8,7 @@ class SuratMasuk extends MY_Controller {
     parent::__construct();
     $this->load->model("ModelSuratMasuk", "suratmasuk");
     $this->load->model("ModelBidang", "bidang");
+     $this->load->model("ModelPegawai", "pegawai");
   }
   //  Method untuk menampilkan data
 	public function daftar()
@@ -52,6 +53,21 @@ class SuratMasuk extends MY_Controller {
       $data['filesurat'] = null;
     }
     $this->suratmasuk->tambah($data);
+    $_SESSION['banyak_surat_masuk'] = $this->suratmasuk->hitungBanyakSuratMasuk();
+    $_SESSION['surat_masuk'] = $this->suratmasuk->suratYangBelumDidisposisi();
+    $kepaladinas = $this->pegawai->dataWhere(["level" => "Kepala Dinas"]);
+    
+    
+    foreach($kepaladinas as $dinas)
+    {
+    	 //kode untuk mengirim notif ke email
+    	$from = "noreply@disbud.sumbarprov.go.id";
+    	$to = $dinas['email'];
+    	$subject = "Pemberitahuan Surat Masuk";
+    	$message = "Anda Punya ".$_SESSION['banyak_surat_masuk']." Surat Yang Harus Di Disposisi";
+    	$headers = "From:" . $from;
+    	mail($to,$subject,$message, $headers);	
+    }
     header("Location: ".site_url("admin/suratmasuk")); // Arahkan kembali user ke halaman daftar
   }
   
@@ -124,6 +140,9 @@ class SuratMasuk extends MY_Controller {
     }
     $this->_dts['data_list'] = $this->suratmasuk->dataWhere($where);
     $this->view("cetak-laporan-surat-masuk", $this->_dts);
+  }
+  public function cetakLembarDisposisi($id){
+  	
   }
   
 }

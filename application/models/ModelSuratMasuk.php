@@ -127,5 +127,13 @@ class ModelSuratMasuk extends MY_Model {
     }
     return $data;
   }
+  public function hitungBanyakSuratMasuk()
+  {
+  	return $this->db->count($this->table, ["status" => "Belum Di disposisi"]);
+  }
+  public function suratYangBelumDidisposisi()
+  {
+  	return $this->db->select($this->table, "*", ["status" => "Belum Di disposisi"]);
+  }
  
 }

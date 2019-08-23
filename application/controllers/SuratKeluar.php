@@ -12,7 +12,7 @@ class SuratKeluar extends MY_Controller {
   //  Method untuk menampilkan data
 	public function daftar()
 	{
-    
+	$this->_dts['bidang'] = $this->bidang->data();
     if($_SESSION['level'] == "Kepala Bidang")
     {
       $this->_dts['bidang'] = $this->bidang->dataWhere(["nip" => $_SESSION['nip']]);  // Proses pengambilan data dari database
@@ -31,6 +31,7 @@ class SuratKeluar extends MY_Controller {
 	{
 		$this->_dts['data_list'] = $this->suratkeluar->data();  // Proses pengambilan data dari database
 		$this->view('kepaladinas.suratkeluar.daftar', $this->_dts); // Oper data dari database ke view
+	
 	}
   
 	public function daftarDisposisi()

@@ -75,7 +75,9 @@
                         <li><a href="{{ site_url('admin/bidang') }}"><i class="fa fa-home"></i> Bidang</a></li>
                         <li><a href="{{ site_url('admin/pegawai') }}"><i class="fa fa-home"></i> Pegawai</a></li>
                         <li><a href="{{ site_url('admin/suratmasuk') }}"><i class="fa fa-home"></i> Surat Masuk</a></li>
-                        <li><a href="{{ site_url('kabid/suratkeluar') }}"><i class="fa fa-home"></i> Surat Keluar</a></li>
+                        <li><a href="{{ site_url('kepaladinas/laporan-surat-masuk') }}"><i class="fa fa-home"></i> Laporan Surat Masuk</a></li>
+                        <li><a href="{{ site_url('kepaladinas/laporan-surat-keluar') }}"><i class="fa fa-home"></i> Laporan Surat Keluar</a></li>
+                        
                     <?php
                         break;
                         
@@ -89,6 +91,7 @@
                         break;
                         case "Kepala Bidang":
                     ?>
+                        <li><a href="{{ site_url('admin/suratmasuk') }}"><i class="fa fa-home"></i> Surat Masuk</a></li>
                         <li><a href="{{ site_url('kabid/suratkeluar') }}"><i class="fa fa-home"></i> Surat Keluar</a></li>
                     <?php
                         break;
@@ -116,6 +119,32 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+              	<?php if($_SESSION['level'] == "Kepala Dinas"): ?>
+      <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">{{ $_SESSION['banyak_surat_masuk'] }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">Anda Punya {{ $_SESSION['banyak_surat_masuk'] }} Surat Yang Belum Di Disposisi</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <?php
+                    foreach($_SESSION['surat_masuk'] as $data):
+                  ?>
+                  <li>
+                    <a href="<?php echo base_url('SuratmasukController'); ?>">
+                      <i class="fa fa-users text-aqua"></i> Surat No <?php echo $data["nomorsm"]; ?> Belum Di Disposisi
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+                </ul>
+              </li>
+              <li class="footer"><a href="<?php echo base_url('kepaladinas/disposisi'); ?>">Tampilkan Semua Surat</a></li>
+            </ul>
+          </li>
+        <?php endif; ?>
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="{{ base_url() }}assets/images/{{ $_SESSION['foto'] }}" alt="">

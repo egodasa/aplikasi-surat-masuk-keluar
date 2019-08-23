@@ -189,7 +189,7 @@
             @include('components.form.textarea', ['_data' => ['name' => 'alamatsurat', 'class' => 'form-control', 'label' => 'Alamat Surat']])	
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'kodepos', 'class' => 'form-control', 'max' => 10, 'label' => 'Kode Pos']])	
             @include('components.form.input', ['_data' => ['type' => 'text', 'name' => 'website', 'class' => 'form-control', 'max' => 100, 'label' => 'Website']])	
-            
+            <input type="hidden" name="ket" value="" />
             <div class="form-group">
               <label>File Surat</label>
               <br>
